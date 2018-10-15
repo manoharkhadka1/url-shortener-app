@@ -136,4 +136,21 @@ class UrlDetail extends Model
         return true;
     }
 
+    /**
+     * to get actual url from url code
+     * @param null $code
+     */
+    public static function findUrlFromCode($code = null)
+    {
+        $urlDetail = UrlDetail::where('url_code',$code)->first();
+
+        if ($urlDetail) {
+            $urlDetail->url_counter = $urlDetail->url_counter+1; // updating url counter
+            $urlDetail->save();
+            return $urlDetail->actual_url;
+        }
+
+        return false;
+    }
+
 }

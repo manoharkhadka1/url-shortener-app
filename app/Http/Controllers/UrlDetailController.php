@@ -21,4 +21,17 @@ class UrlDetailController extends Controller
 
         return response()->json($output);
     }
+
+
+    public function getActualUrl($code)
+    {
+        $actualUrl = UrlDetail::findUrlFromCode($code);
+        if($actualUrl != false) {
+            if(!empty($actualUrl)) {
+                return redirect($actualUrl);
+            }
+        }
+
+        return back();
+    }
 }

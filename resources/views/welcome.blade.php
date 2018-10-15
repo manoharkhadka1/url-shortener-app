@@ -50,6 +50,10 @@
                 });
             });
 
+
+            var url = "{{ route('url.get-actual-url') }}";
+
+
         });
     </script>
 @endpush
