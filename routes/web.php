@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('short-url', 'UrlDetailController@shortUrl')->name('url.short-url');
+Route::post('short-url', 'UrlDetailController@shortUrl')->name('url.short-url');
 
 // for jwt authentication verification
 Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');

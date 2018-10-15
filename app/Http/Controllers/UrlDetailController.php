@@ -7,10 +7,18 @@ use App\UrlDetail;
 
 class UrlDetailController extends Controller
 {
+    /**
+     * get short url
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function shortUrl(Request $request) {
+        $this->validate($request,UrlDetail::rules());
+
         $urlDetail = new UrlDetail();
-        $url = 'https://www.youtube.com/watch?v=6BKak_TALOw&list=PLfdtiltiRHWEhJJgooJ8y_Bbiv2Zb7X6n&index=4';
-        $test = $urlDetail->urlToShortCode($url);
-        dd($test);
+        $url = $request->actual_url;
+        $output = $urlDetail->getShortUrl($url);
+
+        return response()->json($output);
     }
 }

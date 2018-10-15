@@ -11,6 +11,18 @@ class UrlDetail extends Model
     protected $fillable = ['actual_url','url_code','url_counter','expiration_time','status'];
 
     /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public static function rules()
+    {
+        return [
+            'actual_url' => 'required|url',
+        ];
+    }
+
+    /**
      * to get short url
      * @param null $url
      * @return mixed
@@ -19,21 +31,9 @@ class UrlDetail extends Model
         $output['message'] = '';
         $output['status'] = 0;
 
-        if (empty($url) || is_null($url)) {
-            $output['message'] = "No URL was supplied.";
-            return $output;
-        }
-
-        if ($this->validateUrlFormat($url) == false) {
-            $output['message'] = "URL does not have a valid format.";
-            return $output;
-
-        }
-
-
         if ($this->checkIfUrlExists) {
             if (!$this->verifyUrlExists($url)) {
-                $output['message'] = "URL does not appear to exist.";
+                $output['message'] = "This URL currently does not exist.";
                 return $output;
 
             }
