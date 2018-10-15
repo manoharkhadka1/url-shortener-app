@@ -16,12 +16,14 @@ class CreateUrlDetailsTable extends Migration
         Schema::create('url_details', function (Blueprint $table) {
             $table->increments('id');
             $table->text('actual_url');
-            $table->string('url_code');
+            $table->string('url_code')->nullable();
             $table->unsignedInteger('url_counter')->default(0);
             $table->dateTime('expiration_time')->nullable();
             $table->unsignedInteger('status')->default('1')->comment('0:deleted, 1:active, 2:expired, 3:black listed');
             $table->timestamps();
         });
+
+        DB::update("ALTER TABLE url_details AUTO_INCREMENT = 100000;");
     }
 
     /**
