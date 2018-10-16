@@ -15,7 +15,7 @@
     <!-- Top Nav Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="images/logo.png" class="nav-site-logo site-logo" alt="Url Shortener logo"></a>
+            <a class="navbar-brand" href="{{ url('') }}"><img src="images/logo.png" class="nav-site-logo site-logo" alt="Url Shortener logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse justify-content-between" id="">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        {{--<a class="nav-link" href="{{ route('get.login') }}">Login</a>--}}
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
                 </ul>
             </div>
@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="text-center mr-2">
-                    <a class="navbar-brand mt-5" href="#"><img src="images/logo.png" class="site-logo img-fluid" alt="Url Shortener logo"></a>
+                    <a class="navbar-brand mt-5" href="{{ url('') }}"><img src="images/logo.png" class="site-logo img-fluid" alt="Url Shortener logo"></a>
                     <h3 class="mt-5">Welcome To Url Shortener</h3>
                     <h6>Make long url shorter</h6>
 
