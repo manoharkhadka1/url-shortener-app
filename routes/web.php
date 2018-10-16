@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{code}', 'UrlDetailController@getActualUrl')->name('url.get-actual-url');
+Route::get('/{code?}', 'UrlDetailController@getActualUrl')->name('url.get-actual-url');
 
 Route::post('short-url', 'UrlDetailController@shortUrl')->name('url.short-url');
 
