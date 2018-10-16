@@ -46,8 +46,9 @@
                     success:function(response){
                         errorElement.html('');
                         var token = response.data.token;
+                        localStorage.setItem('auth_token',token)
 
-                        let redirectUrl = "{{ route('home') }}?token="+token;
+                        let redirectUrl = "{{ route('dashboard') }}";
                         window.location.href = redirectUrl;
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {

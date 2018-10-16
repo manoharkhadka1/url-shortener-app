@@ -2,7 +2,10 @@
     min-height: 100px;
     margin-top: 30px;
 }
-
+.backend-body-section {
+    min-height: 300px;
+    margin-top: 30px;
+}
 .nav-site-logo {
     width: 60px;
 }

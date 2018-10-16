@@ -34,4 +34,10 @@ class UrlDetailController extends Controller
 
         return back();
     }
+
+    public function getAllUrl()
+    {
+        $allUrl = UrlDetail::all();
+        return response()->json($allUrl);
+    }
 }

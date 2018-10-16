@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+Route::get('/dashboard', function () {
+    return view('auth.dashboard');
+})->name('dashboard');
+
 Route::get('/{code?}', 'UrlDetailController@getActualUrl')->name('url.get-actual-url');
 
 Route::post('short-url', 'UrlDetailController@shortUrl')->name('url.short-url');
