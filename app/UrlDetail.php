@@ -147,7 +147,9 @@ class UrlDetail extends Model
         if ($urlDetail) {
             $urlDetail->url_counter = $urlDetail->url_counter+1; // updating url counter
             $urlDetail->save();
-            return $urlDetail->actual_url;
+            $data['url'] = $urlDetail->actual_url;
+            $data['status'] = $urlDetail->status;
+            return $data;
         }
 
         return false;

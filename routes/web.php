@@ -15,14 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+
+
 Route::get('/dashboard', function () {
     return view('auth.dashboard');
 })->name('dashboard');
 
+Route::get('check-if-url-expired', 'UrlDetailController@checkIfUrlExpired')->name('url.check-if-url-expired');
+
 Route::get('/{code?}', 'UrlDetailController@getActualUrl')->name('url.get-actual-url');
+
 
 Route::post('short-url', 'UrlDetailController@shortUrl')->name('url.short-url');
 

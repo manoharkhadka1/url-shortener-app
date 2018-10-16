@@ -12,6 +12,7 @@
                         <th>Short Url</th>
                         <th>Url Counter</th>
                         <th>Expiration Time</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -78,11 +79,20 @@
                                     expirationTime = '<button class="btn btn-sm add-expiration btn-success">Add</button>';
                                 }
 
+                                let status = '';
+                                if(val.status == 1) {
+                                    status = '<span class="badge badge-success">Success</span>';
+                                } else if(val.status == 2) {
+                                    status = '<span class="badge badge-warning">Expired</span>';
+                                } else if(val.status == 3) {
+                                    status = '<span class="badge badge-danger">Black Listed</span>';
+                                }
+
                                 let hiddenId = '<input type="hidden" class="data-id" value="'+val.id+'">';
                                 let shortUrl = '<a href='+baseUrl+'/'+val.url_code+'>'+baseUrl+'/'+val.url_code+'</a>';
                                 let deleteUrl = '<button class="btn btn-sm delete-url btn-danger">Delete</button>';
 
-                                table.row.add([hiddenId+val.actual_url,shortUrl,val.url_counter,expirationTime,deleteUrl
+                                table.row.add([hiddenId+val.actual_url,shortUrl,val.url_counter,expirationTime,status,deleteUrl
                                 ]).draw();
 
                             });

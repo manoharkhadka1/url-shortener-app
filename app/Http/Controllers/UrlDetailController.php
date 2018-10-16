@@ -28,8 +28,10 @@ class UrlDetailController extends Controller
     {
         $actualUrl = UrlDetail::findUrlFromCode($code);
         if($actualUrl != false) {
-            if(!empty($actualUrl)) {
-                return redirect($actualUrl,302);
+            if(!empty($actualUrl) && $actualUrl['status'] == 1) {
+                return redirect($actualUrl['url'],302);
+            } else if($actualUrl['status'] == 2) {
+                return response()->json('This url is already expired');
             }
         }
 
@@ -38,6 +40,7 @@ class UrlDetailController extends Controller
 
     public function getAllUrl()
     {
+        $this->checkIfUrlExpired();
         $allUrl = UrlDetail::all();
         return response()->json($allUrl);
     }
@@ -70,5 +73,18 @@ class UrlDetailController extends Controller
         }
 
         return response($output, 410);
+    }
+
+    public function checkIfUrlExpired()
+    {
+        $currentDateTime = date('Y-m-d H:i:s');
+        $allUrl = UrlDetail::where('expiration_time','<',$currentDateTime)->get();
+
+        if ($allUrl->count()) {
+           foreach ($allUrl as $url) {
+               $url->status = 2;
+               $url->save();
+           }
+        }
     }
 }
