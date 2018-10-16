@@ -29,7 +29,7 @@ class UrlDetailController extends Controller
         $actualUrl = UrlDetail::findUrlFromCode($code);
         if($actualUrl != false) {
             if(!empty($actualUrl)) {
-                return redirect($actualUrl);
+                return redirect($actualUrl,302);
             }
         }
 
@@ -56,5 +56,19 @@ class UrlDetailController extends Controller
         }
 
         return response()->json($output);
+    }
+
+    public function destroy($id)
+    {
+        $urlDetail = UrlDetail::find($id);
+        $output['status'] = 0;
+        if ($urlDetail->delete()) {
+            $output['status'] = 1;
+            $output['message'] = 'Record deleted successfully';
+        } else {
+            $output['message'] = 'Something went wrong. Please try again.';
+        }
+
+        return response($output, 410);
     }
 }

@@ -3,6 +3,7 @@
 @section('content')
     <div class="backend-body-section">
         <h4>Url Details</h4>
+        <span class="text-success" id="errorMessage"></span>
         <div class="table">
             <table class="table table-bordered table-striped" id="urlRecordTable">
                 <thead>
@@ -78,8 +79,10 @@
                                 }
 
                                 let hiddenId = '<input type="hidden" class="data-id" value="'+val.id+'">';
+                                let shortUrl = '<a href='+baseUrl+'/'+val.url_code+'>'+baseUrl+'/'+val.url_code+'</a>';
+                                let deleteUrl = '<button class="btn btn-sm delete-url btn-danger">Delete</button>';
 
-                                table.row.add([hiddenId+val.actual_url,baseUrl+'/'+val.url_code,val.url_counter,expirationTime,"--"
+                                table.row.add([hiddenId+val.actual_url,shortUrl,val.url_counter,expirationTime,deleteUrl
                                 ]).draw();
 
                             });
@@ -95,6 +98,45 @@
                 let id = $(this).closest('tr').find('.data-id').val();
                 modal.attr('data-Id',id);
                 modal.modal();
+            });
+
+            $(document).on("click",".delete-url",function () {
+                let modal = $("#addExpiration");
+                let id = $(this).closest('tr').find('.data-id').val();
+
+                let url = "{{ url('api/delete') }}/"+id;
+                let errorElement = $("#errorMessage");
+
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this record!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((value)=>{
+                    if(value) {
+                        $.ajax({
+                            url:url,
+                            type: 'delete',
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader('Authorization', 'Bearer '+authToken);
+                            },
+                            success:function(response) {
+                                errorElement.html(response.message);
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log(textStatus);
+                                if (XMLHttpRequest.status == 410) {
+                                    errorElement.html((XMLHttpRequest.responseJSON.message));
+                                    setTimeout(function(){
+                                        window.location.reload();
+                                    },1000);
+                                }
+                            }
+
+                        });
+                    }
+                });
             });
 
             $(document).on('submit',"#expirationForm",function(event){
