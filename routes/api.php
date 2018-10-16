@@ -26,4 +26,5 @@ Route::post('recover', 'AuthController@recover');
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('logout', 'AuthController@logout')->name('api.logout');
     Route::get('get-all-url', 'UrlDetailController@getAllUrl')->name('api.get-all-url');
+    Route::post('add-expiration-time-to-url', 'UrlDetailController@addExpirationTimeToUrl')->name('api.add-expiration-time-to-url');
 });
