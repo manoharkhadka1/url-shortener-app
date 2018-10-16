@@ -18,7 +18,9 @@ Url Shortener Application is such a technique in which a Uniform Resource Locato
 + Clear cache and write new cache file: <code>php artisan cache:clear</code> and <code>php artisan config:cache</code>
 + And make tables: <code>php artisan migrate</code>
 + Build project with npm: <code>npm run dev</code>
++ Create admin user with seeder: <code>composer dump-autoload</code> and <code>php artisan db:seed</code>
 + And run the project: <code>php artisan serve</code>
++ Login credentials: <code>email: admin@admin.com password:test123</code>
 
 
 
