@@ -52,6 +52,11 @@ class UrlDetail extends Model
     }
 
 
+    /**
+     * to validate url format
+     * @param $url
+     * @return mixed
+     */
     protected function validateUrlFormat($url) {
 
         return filter_var($url, FILTER_VALIDATE_URL,
@@ -123,6 +128,12 @@ class UrlDetail extends Model
         return $urlCode;
     }
 
+    /**
+     * to insert code into table
+     * @param $id
+     * @param $code
+     * @return bool
+     */
     protected function toInsertCodeIntoTable($id, $code) {
         $output['message'] = '';
         if ($id == null || $code == null) {
@@ -145,8 +156,12 @@ class UrlDetail extends Model
         $urlDetail = UrlDetail::where('url_code',$code)->first();
 
         if ($urlDetail) {
-            $urlDetail->url_counter = $urlDetail->url_counter+1; // updating url counter
-            $urlDetail->save();
+            // update counter only if url is active
+            if ($urlDetail->status == 1) {
+                $urlDetail->url_counter = $urlDetail->url_counter+1; // updating url counter
+                $urlDetail->save();
+            }
+
             $data['url'] = $urlDetail->actual_url;
             $data['status'] = $urlDetail->status;
             return $data;

@@ -23,8 +23,12 @@ class UrlDetailController extends Controller
         return response()->json($output);
     }
 
-
-    public function getActualUrl($code)
+    /**
+     * to get actual url
+     * @param $code
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function getActualUrl($code = null)
     {
         $actualUrl = UrlDetail::findUrlFromCode($code);
         if($actualUrl != false) {
@@ -38,6 +42,10 @@ class UrlDetailController extends Controller
         return back();
     }
 
+    /**
+     * to get all url
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getAllUrl()
     {
         $this->checkIfUrlExpired();
@@ -45,6 +53,11 @@ class UrlDetailController extends Controller
         return response()->json($allUrl);
     }
 
+    /**
+     * to add expiration time to url
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function addExpirationTimeToUrl(Request $request)
     {
         $urlDetail = UrlDetail::find($request->id);
@@ -61,6 +74,11 @@ class UrlDetailController extends Controller
         return response()->json($output);
     }
 
+    /**
+     * to delete any url
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function destroy($id)
     {
         $urlDetail = UrlDetail::find($id);
@@ -75,6 +93,9 @@ class UrlDetailController extends Controller
         return response($output, 410);
     }
 
+    /**
+     * to update status when url is expired
+     */
     public function checkIfUrlExpired()
     {
         $currentDateTime = date('Y-m-d H:i:s');

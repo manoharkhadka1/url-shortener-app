@@ -59,7 +59,7 @@
     <script>
         $(function () {
             let authToken = localStorage.getItem('auth_token');
-
+            console.log(authToken);
             let table = $("#urlRecordTable").DataTable();
             let baseUrl = "{{ url('') }}";
             function postUrlRecordsToTable() {

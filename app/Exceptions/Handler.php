@@ -48,17 +48,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($request->wantsJson()) {
-            $message = $exception->getMessage();
-            $code = $exception->getStatusCode();
-
-            if ($code == '404') {
-                $message = 'Page not found.';
-            }
-
-            return response()->json(
-                ['message' => $message, 'code' => $code]);
-        }
+//        if ($request->wantsJson()) {
+//            $message = $exception->getMessage();
+//            $code = $exception->getStatusCode();
+//
+//            if ($code == '404') {
+//                $message = 'Page not found.';
+//            }
+//
+//            return response()->json(
+//                ['message' => $message, 'code' => $code]);
+//        }
 
         return parent::render($request, $exception);
     }
