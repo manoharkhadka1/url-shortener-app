@@ -59,7 +59,6 @@
     <script>
         $(function () {
             let authToken = localStorage.getItem('auth_token');
-            console.log(authToken);
             let table = $("#urlRecordTable").DataTable();
             let baseUrl = "{{ url('') }}";
             function postUrlRecordsToTable() {
@@ -81,7 +80,7 @@
 
                                 let status = '';
                                 if(val.status == 1) {
-                                    status = '<span class="badge badge-success">Success</span>';
+                                    status = '<span class="badge badge-success">Active</span>';
                                 } else if(val.status == 2) {
                                     status = '<span class="badge badge-warning">Expired</span>';
                                 } else if(val.status == 3) {

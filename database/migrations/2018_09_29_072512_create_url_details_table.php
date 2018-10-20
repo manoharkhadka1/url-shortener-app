@@ -22,8 +22,6 @@ class CreateUrlDetailsTable extends Migration
             $table->unsignedInteger('status')->default('1')->comment('0:deleted, 1:active, 2:expired, 3:black listed');
             $table->timestamps();
         });
-
-        DB::update("ALTER TABLE url_details AUTO_INCREMENT = 100000;");
     }
 
     /**
