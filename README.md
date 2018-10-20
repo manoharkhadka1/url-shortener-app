@@ -15,7 +15,7 @@ Url Shortener Application is such a technique in which a Uniform Resource Locato
 + Add composer dependencies: <code>composer install</code>
 + Add node dependencies: <code>npm install</code>
 + Make changes in <code>.env</code> file for database
-+ Generate new application key: <code>php artisan key generate</code>
++ Generate new application key: <code>php artisan key:generate</code>
 + Set the JWTAuth secret key used to sign the tokens: <code>php artisan jwt:secret</code>
 + And make tables: <code>php artisan migrate</code>
 + Build project with npm: <code>npm run dev</code>
